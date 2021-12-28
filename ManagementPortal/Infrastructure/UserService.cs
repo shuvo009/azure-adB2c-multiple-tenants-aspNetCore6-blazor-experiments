@@ -12,10 +12,10 @@ namespace ManagementPortal.Infrastructure
             _configuration = configuration;
         }
 
-        public async Task<string> Create(UserProfile userProfile, string name)
+        public async Task<string> Create(UserProfile userProfile, string tenantName)
         {
-            var config = _configuration.GetSection(name).Get<TenantConfiguration>();
-            var client = GetClient(name);
+            var config = _configuration.GetSection(tenantName).Get<TenantConfiguration>();
+            var client = GetClient(tenantName);
             var user = await client.Users.Request().AddAsync(new User
             {
                 GivenName = userProfile.GivenName,
@@ -35,14 +35,29 @@ namespace ManagementPortal.Infrastructure
                     Password = userProfile.Password
                 },
                 PasswordPolicies = "DisablePasswordExpiration",
-                
-                
+
+
                 AdditionalData = new Dictionary<string, object>
                 {
                     { CustomAttributeName("UserRole", config.B2CExtensionAppClientId), userProfile.Role }
                 }
             });
             return user.Id;
+        }
+
+        public async Task<List<UserView>> GetAllUsers(string tenantName)
+        {
+            var config = _configuration.GetSection(tenantName).Get<TenantConfiguration>();
+            var client = GetClient(tenantName);
+            var result = await client.Users
+                .Request()
+                .Select($"Id,DisplayName,{CustomAttributeName("UserRole", config.B2CExtensionAppClientId)}")
+                .GetAsync();
+
+            var users = result.CurrentPage.Select(x => new UserView(x.Id, x.DisplayName,
+                x.AdditionalData?[CustomAttributeName("UserRole", config.B2CExtensionAppClientId)]?.ToString() ?? ""))
+                .ToList();
+            return users;
         }
 
         #region Supported Methods
@@ -57,7 +72,7 @@ namespace ManagementPortal.Infrastructure
 
         private string CustomAttributeName(string attributeName, string b2CExtensionAppClientId)
         {
-            return $"extension_{b2CExtensionAppClientId.Replace("-","")}_{attributeName}";
+            return $"extension_{b2CExtensionAppClientId.Replace("-", "")}_{attributeName}";
         }
 
         #endregion
@@ -66,6 +81,7 @@ namespace ManagementPortal.Infrastructure
 
     public interface IUserService
     {
-        Task<string> Create(UserProfile userProfile, string name);
+        Task<string> Create(UserProfile userProfile, string tenantName);
+        Task<List<UserView>> GetAllUsers(string tenantName);
     }
 }
