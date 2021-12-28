@@ -7,26 +7,26 @@
             <label>@nameof(UserProfile.GivenName)</label>
             <input type="text" class="form-control" @bind="UserProfile.GivenName">
         </div>
-        <div class="form-group">
+        <div class="form-group mt-1">
             <label>@nameof(UserProfile.Surname)</label>
             <input type="text" class="form-control" @bind="UserProfile.Surname">
         </div>
-        <div class="form-group">
+        <div class="form-group mt-1">
             <label>@nameof(UserProfile.UserName)</label>
             <input type="text" class="form-control" @bind="UserProfile.UserName">
         </div>
-        <div class="form-group">
+        <div class="form-group mt-1">
             <label>@nameof(UserProfile.Password)</label>
             <input type="password" class="form-control" @bind="UserProfile.Password">
         </div>
-        <div class="form-group">
+        <div class="form-group mt-1">
             <label>@nameof(UserProfile.Role)</label>
             <input type="text" class="form-control" @bind="UserProfile.Role">
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-2">
     <div class="col">
         <button class="btn btn-success" disabled="@IsSaving" @onclick="@Update">Updated</button>
     </div>

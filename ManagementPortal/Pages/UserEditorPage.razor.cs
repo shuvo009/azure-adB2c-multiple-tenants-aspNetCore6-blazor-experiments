@@ -1,6 +1,7 @@
 ﻿using ManagementPortal.Contracts;
 using ManagementPortal.Infrastructure;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementPortal.Pages
 {
@@ -8,6 +9,10 @@ namespace ManagementPortal.Pages
     {
         [Parameter]
         public string? Id { get; set; }
+
+        [Parameter]
+        [SupplyParameterFromQuery(Name = "tn")]
+        public string? TenantName { get; set; }
 
         [Inject] public IUserService UserService { get; set; } = null!;
 
@@ -20,7 +25,7 @@ namespace ManagementPortal.Pages
             IsSaving = true;
             try
             {
-                await UserService.Create(UserProfile, "MobileTenant");
+                await UserService.Create(UserProfile, TenantName!);
             }
             catch (Exception e)
             {

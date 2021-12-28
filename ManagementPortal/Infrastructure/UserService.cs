@@ -26,28 +26,38 @@ namespace ManagementPortal.Infrastructure
                     new()
                     {
                         SignInType = "userName",
-                        Issuer = config.AppId,
+                        Issuer = config.DomainName,
                         IssuerAssignedId = userProfile.UserName
                     }
                 },
-                PasswordProfile = new PasswordProfile()
+                PasswordProfile = new PasswordProfile
                 {
                     Password = userProfile.Password
                 },
                 PasswordPolicies = "DisablePasswordExpiration",
-                AdditionalData = new Dictionary<string, object> { { "Role", userProfile.Role } }
+                
+                
+                AdditionalData = new Dictionary<string, object>
+                {
+                    { CustomAttributeName("UserRole", config.B2CExtensionAppClientId), userProfile.Role }
+                }
             });
             return user.Id;
         }
 
         #region Supported Methods
 
-        public GraphServiceClient GetClient(string name)
+        private GraphServiceClient GetClient(string name)
         {
-            var config = _configuration.GetValue<TenantConfiguration>(name);
+            var config = _configuration.GetSection(name).Get<TenantConfiguration>();
             var scopes = new[] { "https://graph.microsoft.com/.default" };
             var clientSecretCredential = new ClientSecretCredential(config.TenantId, config.AppId, config.ClientSecret);
             return new GraphServiceClient(clientSecretCredential, scopes);
+        }
+
+        private string CustomAttributeName(string attributeName, string b2CExtensionAppClientId)
+        {
+            return $"extension_{b2CExtensionAppClientId.Replace("-","")}_{attributeName}";
         }
 
         #endregion
