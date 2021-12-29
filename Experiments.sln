@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmApp1", "BlazorWasmApp1\BlazorWasmApp1.csproj", "{393A1F8B-42EC-4BE5-BC88-9D86C03BEF20}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmApp2", "BlazorWasmApp2\BlazorWasmApp2.csproj", "{CEC0034E-7D5C-4ADC-A5D4-FAACE7AB8D96}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreApi", "AspNetCoreApi\AspNetCoreApi.csproj", "{210A8DCE-E76F-435B-998F-766F9B3A0E93}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementPortal", "ManagementPortal\ManagementPortal.csproj", "{55BD16D8-6FC0-4202-9B22-F9FF65A5E9C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasmWebApp", "BlazorWasmWebApp\BlazorWasmWebApp.csproj", "{93651BBF-50FB-41C0-B311-E859B059DDCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasmMobileApp", "BlazorWasmMobileApp\BlazorWasmMobileApp.csproj", "{1E9FE97C-4F32-40B6-8A7E-E82EF1CCC049}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{393A1F8B-42EC-4BE5-BC88-9D86C03BEF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{393A1F8B-42EC-4BE5-BC88-9D86C03BEF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{393A1F8B-42EC-4BE5-BC88-9D86C03BEF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{393A1F8B-42EC-4BE5-BC88-9D86C03BEF20}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEC0034E-7D5C-4ADC-A5D4-FAACE7AB8D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEC0034E-7D5C-4ADC-A5D4-FAACE7AB8D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEC0034E-7D5C-4ADC-A5D4-FAACE7AB8D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEC0034E-7D5C-4ADC-A5D4-FAACE7AB8D96}.Release|Any CPU.Build.0 = Release|Any CPU
 		{210A8DCE-E76F-435B-998F-766F9B3A0E93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{210A8DCE-E76F-435B-998F-766F9B3A0E93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{210A8DCE-E76F-435B-998F-766F9B3A0E93}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +25,14 @@ Global
 		{55BD16D8-6FC0-4202-9B22-F9FF65A5E9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55BD16D8-6FC0-4202-9B22-F9FF65A5E9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55BD16D8-6FC0-4202-9B22-F9FF65A5E9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93651BBF-50FB-41C0-B311-E859B059DDCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93651BBF-50FB-41C0-B311-E859B059DDCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93651BBF-50FB-41C0-B311-E859B059DDCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93651BBF-50FB-41C0-B311-E859B059DDCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E9FE97C-4F32-40B6-8A7E-E82EF1CCC049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9FE97C-4F32-40B6-8A7E-E82EF1CCC049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9FE97C-4F32-40B6-8A7E-E82EF1CCC049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9FE97C-4F32-40B6-8A7E-E82EF1CCC049}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

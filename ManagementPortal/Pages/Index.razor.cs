@@ -8,6 +8,7 @@ namespace ManagementPortal.Pages
     {
         [Inject] public IUserService UserService { get; set; } = null!;
 
+        private bool IsLoading { get; set; }
         private List<UserView> Users { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
@@ -15,9 +16,40 @@ namespace ManagementPortal.Pages
             await base.OnInitializedAsync();
         }
 
-        public async Task LoadUsers(string tenantName)
+        private async Task LoadUsers(string tenantName)
         {
-            Users = await UserService.GetAllUsers(tenantName);
+            IsLoading = true;
+            try
+            {
+                Users = await UserService.GetAllUsers(tenantName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        private async Task DeleteUser(UserView userView)
+        {
+            userView.IsDeleting = true;
+            try
+            {
+                await UserService.Delete(userView.Id, userView.TenantName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                userView.IsDeleting = false;
+            }
+
+            await LoadUsers(userView.TenantName);
         }
     }
 }

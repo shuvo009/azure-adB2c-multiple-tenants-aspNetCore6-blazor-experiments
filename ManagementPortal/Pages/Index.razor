@@ -3,33 +3,45 @@
 <PageTitle>Index</PageTitle>
 <div class="row">
     <div class="col">
-        <button class="btn btn-success" @onclick="@(async _=>await LoadUsers("WebTenant"))">Web Tenant</button>
+        <button class="btn btn-success" disabled="@IsLoading" @onclick="@(async _=>await LoadUsers("WebTenant"))">Web Tenant</button>
     </div>
     <div class="col">
-        <button class="btn btn-success" @onclick="@(async _=>await LoadUsers("MobileTenant"))">Mobile Tenant</button>
+        <button class="btn btn-success" disabled="@IsLoading" @onclick="@(async _=>await LoadUsers("MobileTenant"))">Mobile Tenant</button>
     </div>
 </div>
 
 <div class="row">
     <div class="col">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">DisplayName</th>
-                    <th scope="col">Role</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in Users)
-                {
-                    <tr>
-                        <td>@user.Id</td>
-                        <td>@user.DisplayName</td>
-                        <td>@user.Role</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+      @if (!IsLoading)
+      {
+          <table class="table">
+              <thead>
+              <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">DisplayName</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Change Password</th>
+                  <th scope="col">Delete</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach (var user in Users)
+              {
+                  <tr>
+                      <td>@user.Id</td>
+                      <td>@user.DisplayName</td>
+                      <td>@user.Role</td>
+                      <td>
+                          <button class="btn btn-danger" disabled="@user.IsDeleting" @onclick="@(async _ => { await DeleteUser(user);})">Delete</button>
+                      </td>
+                  </tr>
+              }
+              </tbody>
+          </table>
+      }
+      else
+      {
+          <h5 class="text-center">Loading...</h5>
+      }
     </div>
 </div>

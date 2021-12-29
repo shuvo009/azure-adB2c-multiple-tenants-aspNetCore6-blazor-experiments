@@ -1,7 +1,6 @@
 ﻿using ManagementPortal.Contracts;
 using ManagementPortal.Infrastructure;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementPortal.Pages
 {
@@ -15,6 +14,7 @@ namespace ManagementPortal.Pages
         public string? TenantName { get; set; }
 
         [Inject] public IUserService UserService { get; set; } = null!;
+        [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
         public UserProfile UserProfile { get; set; } = new();
 
@@ -26,6 +26,7 @@ namespace ManagementPortal.Pages
             try
             {
                 await UserService.Create(UserProfile, TenantName!);
+                NavigationManager.NavigateTo("/");
             }
             catch (Exception e)
             {
